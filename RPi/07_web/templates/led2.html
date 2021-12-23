@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+  
+</head>
+<body>
+    <h1>LED ON/OFF</h1>
+    <button onclick="led_op(1)" class="red">RED LED ON</button>
+    <button onclick="led_op(2)" class="red">RED LED OFF</button>
+    <button onclick="led_op(3)" class="blue">BLUE LED ON</button>
+    <button onclick="led_op(4)" class="blue">BLUE LED OFF</button>
+    <div id="result"></div>
+    <script>
+        function led_op(op){
+            let url = (op < 3)?
+                    (op == 1)? "/led/redon":"/led/redoff":
+                    (op == 3)? "/led/blueon":"/led/blueoff";
+            fetch(url)
+            .then(response=>response.text())
+            .then(data=>{
+                let result = document.getElementById("result")
+                result.innerHTML = "<h1>" + data + "</h1>"
+            })
+        }
+    </script>
+</body>
+</html>
